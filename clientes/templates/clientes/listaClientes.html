@@ -1,0 +1,31 @@
+{% extends 'clientes/base.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+    <div class="table-responsive table-hover text-nowrap">
+        <form action="" method="post" class="form form-inline">
+			{% csrf_token %}
+			{{ form | crispy }}
+			<input type="submit" class="btn btn-info" value="Pesquisar" />
+		</form>
+
+        <table id="dt-vertical-scroll" class="table table-sm" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+        {% for Cliente in clientes %}
+        <tbody id="myTable">
+            <tr scope="row">
+                <td>{{Cliente.nome_cliente}}</td>
+                <td>{{Cliente.cpf}}</td>
+                <td><a href="editar/{{cliente.id}}" class="btn btn-warning btn-sm" id = '{{Cliente.id}}'>editar</a><a href="#" class="btn btn-danger btn-sm">excluir</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock conteudo %}
+
