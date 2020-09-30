@@ -11,8 +11,6 @@
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Bootstrap Buntle JavaScript -->
-    <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <!-- Popper Minimal JavaScript-->
     <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
     <!-- JQuery Para formatação de campos-->
@@ -24,6 +22,7 @@
             $('.date').mask('00/00/0000');
             $('.cnpj').mask('00.000.000/0000-00');
             $('.ctps').mask('0000000/0000-AA')
+            $('.cnj').mask('0000000-00.0000.0.00.0000')
             $('.date_time').mask('00/00/0000 00:00:00');
             $('.cep').mask('00000-000');
             $('.telefone').mask('(00) 0000-0000');
@@ -37,10 +36,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <!-- Bootstrap core CSS -->
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-<!-- Bootstrap grid CSS -->
-<link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
-<!-- Bootstrap Reboot -->
-<link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet">
 <!-- Bootstrap MDB -->
 <link href="{% static 'css/mdb.lite.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">

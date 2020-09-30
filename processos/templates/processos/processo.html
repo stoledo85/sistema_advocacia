@@ -9,7 +9,63 @@
         {% endif %}
     <form action="{% url 'processos:processo' %}" method="post">
     {% csrf_token %}
-        {{form | crispy}}
+        {{crispy}}
+        <div class="form-group">
+            <h5 class="h4 mb-4">
+                <strong>Cadastro de Processos</strong>
+            </h5>
+            <label for="id_processos">Cliente: </label>{{form.cliente}}</br>
+            <label for="id_processos">Área de Atuação: </label><input id="id_processos" class="col-3"type="text" name="area_atuacao" maxlength="50" required></br>
+            <label for="id_processos">Objeto da Ação: </label><input id="id_processos" class="col-3"type="text" name="obj_acao" maxlength="50" required></br>
+            <label for="id_processos">Número do Processo: </label><input id="id_processos" class="cnj"type="text" name="cnj" maxlength="24"  required></br>
+            <label for="id_processos">Trâmite: </label><input id="id_processos" class="col-3"type="text" name="local_tramite" maxlength="15" required>
+            <label for="id_processos">UF:</label>
+                                <select id="id_processos" name="tramite_uf">
+                                    <option>Selecione o Estado</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernanbuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select></br>
+            <label for="id_processos">Advogado Responsável: </label>{{form.advogado}}</br>
+            <label for="id_processos">Data de Contratação: </label><input id="id_processos" class="date" type="date" name="dt_contratacao" required>
+            <label for="id_processos">Data de Sentença: </label><input id="id_processos" class="date" type="date" name="dt_sentenca" required>
+            <label for="id_processos">Data de Transito Juldado: </label><input id="id_processos" class="date" type="date" name="dt_trans_julgado" required></br>
+            <label for="id_processos">Data de Execução: </label><input id="id_processos" class="date" type="date" name="dt_execucao" required>
+            <label for="id_processos">Data de Encerramento: </label><input id="id_processos" class="date" type="date" name="data_encerramento" required></br>
+            <div class="input-group mb-2 mr-sm-2">
+            <label for="id_processos">Valor da Causa: </label>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">R$</div>
+                </div>
+                <input type="text" class="money" id="id_processos" name="vlr_causa">
+            </div>
+            <label for="id_processos">Pedido: </label><input id="id_processos" type="text" name="pedido" maxlength="50"  required></br>
+            <label for="id_processos">Obs: </label><textarea class="form-control rounded-0" id="id_processos" name="obs"  required></textarea></br>
+        </div>
         <input type="submit" class="btn btn-primary" value="Salvar"/>
     </form>
 {% endblock conteudo %}
