@@ -7,7 +7,7 @@ from .forms import ClienteForm, EnderecoForm, BuscaClienteForm
 
 
 def index(request):
-    return render(request, "clientes/index.html", {})
+    return render(request, "clientes/index.html")
 
 
 def enderecoView(request):
