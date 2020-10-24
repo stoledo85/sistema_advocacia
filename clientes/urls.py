@@ -5,6 +5,7 @@ from . import views
 app_name = "clientes"
 
 urlpatterns = [
+    
     path("", views.index, name="index"),
     path("endereco/", views.enderecoView, name="endereco"),
     path("cliente/", views.clienteView, name="cliente"),
