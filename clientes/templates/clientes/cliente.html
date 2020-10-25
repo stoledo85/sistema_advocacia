@@ -18,96 +18,54 @@
                 <strong>Cadastro de Cliente</strong>
             </h5>
             <label for="id_cliente">Nome: </label><input id="id_cliente" class="col-5"type="text" name="nome_cliente" maxlength="100" required></br>
-            <label for="id_cliente">Carteira de Trabalho: </label><input id="id_cliente" class="ctps"type="text" name="ctps_cliente" maxlength="15"  required>
-            <label for="id_cliente">Profissão: </label>{{form.profissao_cliente}}</br>
             <label for="id_cliente">CPF: </label><input id="id_cliente" class="cpf" type="text" name="cpf" maxlength="15"  required>
             <label for="id_cliente">RG: </label><input id="id_cliente" class="rg" type="text" name="rg" maxlength="10" required></br>
-            <label for="id_cliente">Nacionalidade: </label><input id="id_cliente" class="rg" type="text" name="nacionalidade" maxlength="10" required></br>
             <label for="id_cliente">Telefone: </label><input id="id_cliente" class="telefone" type="text" name="telefone" maxlength="11" required></br>
             <label for="id_cliente">Estado Civil: </label>{{form.estado_civil}}</br>
             <label for="id_cliente">Data de Nascimento: </label><input id="id_cliente" class="date" type="date" name="data_nascimento" required></br>
-            <label for="id_cliente">Endereço: </label>{{form.cidade_endereco}}
-            <a data-toggle="modal" data-target="#exampleModal" ><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
-            <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
-            </svg></a></br>
-            <label for="id_cliente">Escolaridade: </label>{{form.escolaridade}}</br>
             <label for="id_cliente">E-mail: </label><input type="email" id="id_cliente" name="email"></br>
-            <label for="id_cliente">Obs: </label><textarea class="form-control rounded-0" id="id_cliente" name="observacao"placeholder="Observações" required></textarea></br>
+            <label for="id_cliente">Endereço: </label>
+            <input id="id_cliente" class="col-3" type="text" name="endereco" maxlength="100" required></br>
+            <label for="id_cliente">Número: </label>
+            <input id="id_cliente" class="col-1" type="text" name="nro_endereco" >
+            <label for="id_cliente">Bairro: </label>
+            <input id="id_cliente" type="text" name="bairro_endereco" ></br>
+            <label for="id_cliente">Cidade: </label>
+            <input id="id_cliente" type="text" name="cidade_endereco" maxlength="45" required>
+            <label for="id_cliente">Estado: </label>
+            <select id="id_cliente" name="estado">
+                <option>Selecione o Estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernanbuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select></br>
+            <label for="id_cliente">CEP:</label>
+            <input id="id_cliente" type="text" class="cep" data-mask="00000-000" name="cep" maxlength="9" required></br>
         </div>  
-    </form>
-        <form action="{% url 'clientes:endereco' %}" method="post">
-        {% csrf_token %}
-            <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Endereço</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {% if erro %}
-                            <div class="alert alert-danger">{{ erro }}</div>
-                        {% endif %}
-                            {% if sucesso %}
-                                <div class="alert alert-success">{{ sucesso }}</div>
-                            {% endif %}
-                            <form action="{% url 'clientes:endereco' %}" method="post">
-                                {% csrf_token %}
-                                <label for="id_endereco">Endereço:</label>
-                                <input id="id_endereco" type="text" name="logradouro_endereco" maxlength="40" required></br>
-                                <label for="id_endereco">Número:</label>
-                                <input id="id_endereco" type="text" name="nro_endereco" ></br>
-                                <label for="id_endereco">Bairro:</label>
-                                <input id="id_endereco" type="text" name="bairro_endereco" ></br>
-                                
-                                <label for="id_endereco">Cidade:</label>
-                                <input id="id_endereco" type="text" name="cidade_endereco" maxlength="45" required></br>
-                                <label for="id_endereco">Estado:</label>
-                                <select id="id_endereco" name="nome_uf">
-                                    <option>Selecione o Estado</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernanbuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select></br>
-                                <label for="id_endereco">CEP:</label>
-                                <input id="id_endereco" type="text" class="cep" data-mask="00000-000" name="cep" maxlength="9" required></br>
-                            </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
             <input type="submit" class="btn btn-primary" value="Salvar"/>
         </form>
 </div>

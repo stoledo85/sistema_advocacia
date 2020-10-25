@@ -7,7 +7,6 @@ app_name = "clientes"
 urlpatterns = [
     
     path("", views.index, name="index"),
-    path("endereco/", views.enderecoView, name="endereco"),
     path("cliente/", views.clienteView, name="cliente"),
     path('listacliente/', views.listagemCliente, name="listacliente"), 
     path('editarcliente/<int:id>', views.editarCliente,name="editarCliente"),
