@@ -1,6 +1,8 @@
 {% extends 'clientes/base.html' %}
 {% load crispy_forms_tags %}
+
 {% block conteudo %}
+{{crispy}}
 <div class="container-fluid">
         {% if erro %}
 			<div class="alert alert-danger">{{ erro }}</div>
@@ -9,64 +11,65 @@
 			<div class="alert alert-success">{{ sucesso }}</div>
 		{% endif %}
 
-    <form action="{% url 'clientes:cliente' %}" method="post">
+    <form action="{% url 'clientes:cliente' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% comment %} {{form | crispy}} {% endcomment %}
         {{crispy}}
-        <div class="form-group">
+        <div class="form-row">
             <h5 class="h4 mb-4">
                 <strong>Cadastro de Cliente</strong>
             </h5>
-            <label for="id_cliente">Nome: </label><input id="id_cliente" class="col-5"type="text" name="nome_cliente" maxlength="100" required></br>
-            <label for="id_cliente">CPF: </label><input id="id_cliente" class="cpf" type="text" name="cpf" maxlength="15"  required>
-            <label for="id_cliente">RG: </label><input id="id_cliente" class="rg" type="text" name="rg" maxlength="10" required></br>
-            <label for="id_cliente">Telefone: </label><input id="id_cliente" class="telefone" type="text" name="telefone" maxlength="11" required></br>
-            <label for="id_cliente">Estado Civil: </label>{{form.estado_civil}}</br>
-            <label for="id_cliente">Data de Nascimento: </label><input id="id_cliente" class="date" type="date" name="data_nascimento" required></br>
-            <label for="id_cliente">E-mail: </label><input type="email" id="id_cliente" name="email"></br>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">Nome: </label>
+            <input id="id_cliente" type="text" name="nome_cliente" maxlength="100" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">CPF: </label>
+            <input id="id_cliente" class="cpf" type="text" name="cpf" maxlength="14" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">RG: </label>
+            <input id="id_cliente" class="rg" type="text" name="rg" maxlength="8" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">Telefone: </label>
+            <input id="id_cliente" class="telefone" type="text" name="telefone" maxlength="11" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">Estado Civil: </label>{{form.estado_civil}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">Data de Nascimento: </label>
+            <input id="id_cliente" class="date" type="text" name="data_nascimento" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">E-mail: </label>
+            <input type="email" id="id_cliente" name="email">
+        </div>
+        <div class="form-group col-md-6 mb-0">
             <label for="id_cliente">Endereço: </label>
-            <input id="id_cliente" class="col-3" type="text" name="endereco" maxlength="100" required></br>
+            <input id="id_cliente" type="text" name="endereco" maxlength="100" required>
+        </div>
+        <div class="form-group col-md-6 mb-0">
             <label for="id_cliente">Número: </label>
-            <input id="id_cliente" class="col-1" type="text" name="nro_endereco" >
+            <input id="id_cliente" type="text" name="nro_endereco" >
+        </div>
+        <div class="form-group col-md-6 mb-0">
             <label for="id_cliente">Bairro: </label>
-            <input id="id_cliente" type="text" name="bairro_endereco" ></br>
+            <input id="id_cliente" type="text" name="bairro_endereco" >
+        </div>
+        <div class="form-group col-md-6 mb-0">
             <label for="id_cliente">Cidade: </label>
             <input id="id_cliente" type="text" name="cidade_endereco" maxlength="45" required>
-            <label for="id_cliente">Estado: </label>
-            <select id="id_cliente" name="estado">
-                <option>Selecione o Estado</option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernanbuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-            </select></br>
+        </div>
+        <div class="form-group col-md-6 mb-0">
+            <label for="id_cliente">Estado: </label>{{form.estado}}
+        </div>
+        <div class="form-group col-md-6 mb-0">
             <label for="id_cliente">CEP:</label>
-            <input id="id_cliente" type="text" class="cep" data-mask="00000-000" name="cep" maxlength="9" required></br>
-        </div>  
+            <input id="id_cliente" type="text" class="cep" data-mask="00000-000" name="cep" maxlength="9" required>
+        </div>
             <input type="submit" class="btn btn-primary" value="Salvar"/>
-        </form>
+    </form>
 </div>
 {% endblock conteudo %}

@@ -4,12 +4,11 @@ from django.forms import ModelForm
 from .models import Cliente
 
 
-class ClienteForm(forms.ModelForm):
+class CriarCliente(forms.ModelForm):
 
     class Meta:
         model = Cliente
-        fields = ["nome_cliente", "cpf", "rg", "estado_civil", "data_nascimento", "endereco",
-                  "nro_endereco", "bairro", "cidade", "estado", "cep", "email", "telefone"]
+        fields = '__all__'
 
 
 class BuscaClienteForm(forms.Form):

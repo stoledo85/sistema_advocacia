@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block conteudo %}
     <div class="table-responsive table-hover text-nowrap">
-        <form action="" method="post" class="form form-inline">
+        <form action="" method="post" enctype="multipart/form-data" class="form form-inline">
 			{% csrf_token %}
 			{{ form | crispy }}
 			<input type="submit" class="btn btn-info" value="Pesquisar" />
@@ -21,7 +21,7 @@
             <tr scope="row">
                 <td>{{Cliente.nome_cliente}}</td>
                 <td>{{Cliente.cpf}}</td>
-                <td><a href="editar/{{cliente.id}}" class="btn btn-warning btn-sm" id = '{{Cliente.id}}'>editar</a><a href="#" class="btn btn-danger btn-sm">excluir</a></td>
+                <td><a href="editar/{{cliente.id}}" class="btn btn-warning btn-sm" id = '{{Cliente.id}}'>editar</a><a href="delete/{{Cliente.id}}" class="btn btn-danger btn-sm" id = '{{Cliente.id}}'>excluir</a></td>
             </tr>
         </tbody>
         {% endfor %}

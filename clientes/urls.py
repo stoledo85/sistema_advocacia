@@ -9,5 +9,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("cliente/", views.clienteView, name="cliente"),
     path('listacliente/', views.listagemCliente, name="listacliente"), 
-    path('editarcliente/<int:id>', views.editarCliente,name="editarCliente"),
+    path('editar/<int:cliente_id>', views.updateCliente),
+    path('deletar/<int:cliente_id>', views.deleteCliente),
 ]
