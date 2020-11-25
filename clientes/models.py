@@ -31,23 +31,19 @@ class Cliente(models.Model):
         ("RR", "Roraima"), ("SC", "Santa Catarina"),
         ("SP", "São Paulo"), ("SE", "Sergipe"), ("TO", "Tocantins"),
     )
-    nome_cliente = models.CharField(
-        verbose_name="Nome", max_length=100)
-    cpf = models.CharField(verbose_name="Número do CPF", max_length=14)
-    rg = models.CharField(verbose_name="Número de RG", max_length=8)
-    estado_civil = models.CharField(
-        verbose_name="Estado Civil", max_length=1, choices=ESTADO_CIVIL)
-    data_nascimento = models.DateField(verbose_name="Data de Nascimento")
-    endereco = models.CharField(
-        verbose_name="Endereço", max_length=100)
-    nro_endereco = models.IntegerField(
-        verbose_name="Número do Cliente", null=True, blank=True)
-    bairro = models.CharField(verbose_name="Bairro", max_length=45)
-    cidade = models.CharField(verbose_name="Cidade", max_length=15)
-    estado = models.CharField(verbose_name="UF", max_length=2, choices=UF)
-    cep = models.CharField(verbose_name="CEP", max_length=8)
-    email = models.EmailField(verbose_name="E-mail", max_length=254)
-    telefone = models.CharField(verbose_name="Telefone", max_length=11)
+    nome_cliente = models.CharField(max_length=100)
+    cpf = models.CharField(max_length=14)
+    rg = models.CharField(max_length=8)
+    estado_civil = models.CharField(max_length=1, choices=ESTADO_CIVIL)
+    data_nascimento = models.DateField()
+    endereco = models.CharField(max_length=100)
+    nro_endereco = models.IntegerField(null=True, blank=True)
+    bairro = models.CharField(max_length=45)
+    cidade = models.CharField(max_length=15)
+    estado = models.CharField(max_length=2, choices=UF)
+    cep = models.CharField(max_length=8)
+    email = models.EmailField(max_length=254)
+    telefone = models.CharField(max_length=11)
 
     def __str__(self):
         return self.nome_cliente

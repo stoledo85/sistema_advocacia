@@ -9,12 +9,7 @@ class ProcessoForm(forms.ModelForm):
     class Meta:
         model = Processo
 
-        fields = [
-            "cliente", "area_atuacao", "obj_acao", "cnj",
-            "local_tramite", "nro_processo", "advogado", "dt_contratacao",
-            "dt_encerramento", "dt_trans_julgado", "dt_execucao",  "dt_sentenca",
-            "vlr_causa", "pedido", "obs",
-        ]
+        fields = '__all__'
 
 
 class faseProcessoForm(forms.ModelForm):

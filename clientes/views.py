@@ -46,8 +46,8 @@ def listagemCliente(request):
     contexto = {'clientes': clientes, "form": form}
     return render(request, "clientes/listaClientes.html", contexto)
 
-
-def updateCliente(request, id):
+#Trecho comentado por conta de ajuste.
+""" def updateCliente(request, id):
     cliente = get_object_or_404(Cliente, pk=id)
     form = ClienteForm(instance=cliente)
     if(request.method == 'POST'):
@@ -73,4 +73,4 @@ def updateCliente(request, id):
         else:
             return render(request, 'cliente/listacliente.html', {'form': form, 'cliente' : cliente})
     elif(request.method == 'GET'):
-        return render(request, 'cliente/editarCliente.html', {'form': form, 'cliente' : cliente})
+        return render(request, 'cliente/editarCliente.html', {'form': form, 'cliente' : cliente}) """

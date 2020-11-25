@@ -8,8 +8,20 @@ class ClienteForm(forms.ModelForm):
 
     class Meta:
         model = Cliente
-        fields = ["nome_cliente", "cpf", "rg", "estado_civil", "data_nascimento", "endereco",
-                  "nro_endereco", "bairro", "cidade", "estado", "cep", "email", "telefone"]
+        fields = '__all__'
+        labels = {'nome_cliente':'Nome Completo',
+                  'cpf':'CPF',
+                  'rg':'RG', 
+                  'estado_civil':'Estado Civil', 
+                  'data_nascimento':'Data de Nascimento', 
+                  'endereco':'Endereço',
+                  'nro_endereco':'Número', 
+                  'bairro':'Bairro', 
+                  'cidade':'Cidade', 
+                  'estado':'Estado', 
+                  'cep':'CEP', 
+                  'email':'E-mail', 
+                  'telefone':'Telefone'} 
 
 
 class BuscaClienteForm(forms.Form):

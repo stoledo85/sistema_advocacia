@@ -34,9 +34,6 @@ class Processo(models.Model):
     advogado = models.ForeignKey(
         User, verbose_name="Advogado Responsavel", on_delete=models.DO_NOTHING)
     dt_contratacao = models.DateField(verbose_name="Data da Contratação")
-    dt_encerramento = models.DateField(verbose_name="Data de Encerramento")
-    dt_trans_julgado = models.DateField(
-        verbose_name="Data Trânsito de Julgado")
     dt_execucao = models.DateField(verbose_name="Data de Execução")
     dt_sentenca = models.DateField(verbose_name="Data da Sentença")
     vlr_causa = models.DecimalField(
