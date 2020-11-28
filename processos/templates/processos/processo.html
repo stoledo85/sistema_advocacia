@@ -10,7 +10,6 @@
         {% endif %}
     <form action="{% url 'processos:processo' %}" method="post">
     {% csrf_token %}
-        {{crispy}}
             <div class="form-group row">
                 <div class="col-sm">{{form.cliente|as_crispy_field}}</div>
                 <div class="col-sm">{{form.area_atuacao|as_crispy_field}}</div>

@@ -54,17 +54,13 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'processos:processo' %}">Processo Novo</a>
-              {% comment %}
-              <a class="dropdown-item" href="{% url 'processos:faseProcesso' %}"
-                >Fase do Processo</a
-              >
-              {% endcomment %}
+                <a class="dropdown-item" href="{% url 'processos:faseProcesso' %}">Fase do Processo</a>
             </div>
           </li>
         </ul>
       </div>
     </nav>
-     <div class="container">
+    <div class="container">
         <div class="col-md-10 offset-md-1 mt-5">
             <div class="jumbotron">
                 <h1 class="display-4">{% block titulo %} Sistema de Advocacia  {% endblock titulo %}</h1>

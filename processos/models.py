@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from clientes.models import Cliente
 
+
 class Processo(models.Model):
     UF = (
         ("AC", "Acre"), ("AL", "Alagoas"),
@@ -47,11 +48,9 @@ class Processo(models.Model):
 
 class faseProcesso(models.Model):
 
-    tipo_fase_processo = models.CharField(verbose_name='Tipo', max_length=50)
-    desc = models.TextField(verbose_name='Descrição')
-    processo = models.ForeignKey(
-        Processo, verbose_name="Processo", on_delete=models.PROTECT)
-    
+    tipo_fase_processo = models.CharField(max_length=50)
+    desc = models.TextField()
+    processo = models.ForeignKey(Processo, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.tipo_fase_processo + " - " + self.processo

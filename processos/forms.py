@@ -15,5 +15,4 @@ class ProcessoForm(forms.ModelForm):
 class faseProcessoForm(forms.ModelForm):
     class Meta:
         model = faseProcesso
-
-        fields = ["tipo_fase_processo", "desc", "processo"]
+        fields = '__all__'

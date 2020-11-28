@@ -120,10 +120,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-# Necessita a instalação do Crispy para funcionar.
-#!pip install django-crispy
-#documentação oficial no link: https://django-bootstrap4.readthedocs.io/en/latest/#
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "sistema_advocacia/static"),)
