@@ -4,27 +4,29 @@ from django.forms import ModelForm
 from .models import Cliente
 
 
-class ClienteForm(forms.ModelForm):
+class ClienteForm(ModelForm):
 
     class Meta:
         model = Cliente
         fields = '__all__'
-        labels = {'nome_cliente':'Nome Completo',
-                  'cpf':'CPF',
-                  'rg':'RG', 
-                  'estado_civil':'Estado Civil', 
-                  'data_nascimento':'Data de Nascimento', 
-                  'endereco':'Endereço',
-                  'nro_endereco':'Número', 
-                  'bairro':'Bairro', 
-                  'cidade':'Cidade', 
-                  'estado':'Estado', 
-                  'cep':'CEP', 
-                  'email':'E-mail', 
-                  'telefone':'Telefone'} 
+        labels = {
+            "nome_cliente" : "Nome Completo",
+            "cpf" : "CPF",
+            "rg" : "RG", 
+            "estado_civil" : "Estado Civil", 
+            "data_nascimento" : "Data de Nascimento", 
+            "endereco" : "Endereço",
+            "nro_endereco" : "Número", 
+            "bairro" : "Bairro", 
+            "cidade" : "Cidade", 
+            "estado" : "Estado", 
+            "cep" : "CEP", 
+            "email" : "E-mail", 
+            "telefone" : "Telefone"
+            } 
 
 
-class BuscaClienteForm(forms.Form):
+class BuscaClienteForm(ModelForm):
     nome_cliente = forms.CharField(max_length=45)
     cpf = forms.CharField(max_length=11)
     labels = {

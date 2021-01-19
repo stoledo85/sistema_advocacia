@@ -1,2 +1,2 @@
-django ~= 3.1.1
-django-crispy
+django == 3.1.1
+django-crispy-forms == 1.10.0
