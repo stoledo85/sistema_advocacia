@@ -9,7 +9,20 @@
         {% endif %}
     <form action="{% url 'processos:faseprocesso' %}" method="post">
     {% csrf_token %}
-        {{form | crispy}}
+        <div class="form-group row">
+            <div class="col-sm">
+                {{form.tipo_fase_processo | as_crispy_field}}
+            </div>
+            <div class="col-sm">
+                {{form.processo | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm">
+                {{form.desc | as_crispy_field}}
+            </div>
+        </div>
+        
         <input type="submit" class="btn btn-primary" value="Salvar"/>
     </form>
 {% endblock conteudo %}

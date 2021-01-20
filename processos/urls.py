@@ -6,5 +6,5 @@ app_name = "processos"
 
 urlpatterns = [
     path("processo/", views.processoView, name="processo"), 
-    path("faseProcesso/", views.faseProcessoView, name="faseProcesso"),
+    path("faseprocesso/", views.faseProcessoView, name="faseprocesso"),
 ]
