@@ -1,5 +1,5 @@
-## Name_of_the_project
-sistema_advocacia
+## Sistema de advocacia em Django
+
 Projeto realizado no Trabalho de Conclusao de Curso de 2020.
 
  
