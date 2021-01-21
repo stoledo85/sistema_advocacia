@@ -5,7 +5,6 @@ from .models import Processo, faseProcesso
 
 
 class ProcessoForm(forms.ModelForm):
-
     class Meta:
         model = Processo
 

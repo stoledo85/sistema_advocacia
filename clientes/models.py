@@ -1,11 +1,22 @@
 from django.db import models
 
-# Create your models here.
-
-"""Modelo Cliente"""
-
-
 class Cliente(models.Model):
+    """Model que compoe a classe Cliente.
+    Args:
+    nome_cliente(variable) : CharField -- Recebe o Nome completo do Cliente(Campo Obrigatorio).
+    cpf(variable) : CharField -- Campo do CPF não formatado com pontos ou infens(Campo Obrigatorio).
+    rg(variable) : models.CharField -- Campo do RG não formatado com pontos ou infens(Campo Obrigatorio).
+    estado_civil(list) : CharField -- Lista selecionavel do estado civil do cliente.
+    data_nascimento(variable) = DateField -- Data de nascimento no formato DD/MM/AAAA(Campo Obrigatorio).
+    endereco(variable) = CharField -- Recebe o Logradouro do Cliente.
+    nro_endereco(variable) = IntegerField -- Número do Imovel.
+    bairro(variable) = CharField -- Campo que recebe o Bairro.
+    cidade(variable) = CharField -- Campo que recebe o nome da Cidade.
+    estado(list) = CharField -- Lista selecionavel da Unidade federativa ou estado.
+    cep(variable) = CharField -- Campo que recebe o CEP sem formatação.
+    email(variable) = EmailField -- Campo que recebe o endereço de email com validação de campo.
+    telefone(variable) = CharField -- Recebe o numero de telefone no formato (XX)XXXX - XXXX
+    """
 
     ESTADO_CIVIL = (
         ("S", "Solteiro"),
