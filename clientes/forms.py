@@ -26,7 +26,7 @@ class ClienteForm(ModelForm):
             } 
 
 
-class BuscaClienteForm(ModelForm):
+class BuscaClienteForm(forms.Form):
     nome_cliente = forms.CharField(max_length=45)
     cpf = forms.CharField(max_length=11)
     labels = {
