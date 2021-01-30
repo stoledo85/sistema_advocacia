@@ -5,28 +5,26 @@ from .models import Cliente
 
 
 class ClienteForm(ModelForm):
-    """
-        Formulário do cadastro do Cliente.
-        
-    """
+    """Formulário do cadastro do Cliente."""
+
     class Meta:
         model = Cliente
-        fields = '__all__'
+        fields = "__all__"
         labels = {
-            "nome_cliente" : "Nome Completo",
-            "cpf" : "CPF",
-            "rg" : "RG", 
-            "estado_civil" : "Estado Civil", 
-            "data_nascimento" : "Data de Nascimento", 
-            "endereco" : "Endereço",
-            "nro_endereco" : "Número", 
-            "bairro" : "Bairro", 
-            "cidade" : "Cidade", 
-            "estado" : "Estado", 
-            "cep" : "CEP", 
-            "email" : "E-mail", 
-            "telefone" : "Telefone"
-            } 
+            "nome_cliente": "Nome Completo",
+            "cpf": "CPF",
+            "rg": "RG",
+            "estado_civil": "Estado Civil",
+            "data_nascimento": "Data de Nascimento",
+            "endereco": "Endereço",
+            "nro_endereco": "Número",
+            "bairro": "Bairro",
+            "cidade": "Cidade",
+            "estado": "Estado",
+            "cep": "CEP",
+            "email": "E-mail",
+            "telefone": "Telefone",
+        }
 
 
 class BuscaClienteForm(forms.Form):
@@ -36,6 +34,7 @@ class BuscaClienteForm(forms.Form):
         nome_cliente -- recebe uma string de tamanho 15 do nome.
         cpf -- recebe o nome do cpf sem pontos ou marcações.
     """
+
     nome_cliente = forms.CharField(max_length=45)
     cpf = forms.CharField(max_length=11)
     labels = {
