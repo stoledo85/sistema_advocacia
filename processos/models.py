@@ -23,7 +23,7 @@ class Processo(models.Model):
     )
 
     cliente = models.ForeignKey(
-        Cliente, verbose_name="Cliente", on_delete=models.PROTECT)
+        Cliente, verbose_name="Cliente", on_delete=models.CASCADE)
     area_atuacao = models.CharField(
         verbose_name="Area de Atuação", max_length=50)
     obj_acao = models.CharField(verbose_name="Objetivo da Ação", max_length=50)
