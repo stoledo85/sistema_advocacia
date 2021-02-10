@@ -15,7 +15,7 @@ def index(request):
 def clienteView(request):
     """Cadastro de Cliente.
     Recebe um objeto cliente no formulario se o resultado for valido,
-    o metodo salva no banco de dados e retorna um popup dizendo que a operação foi feita com sucesso. 
+    o metodo salva no banco de dados e retorna um popup dizendo que a operação foi feita com sucesso.
     """
     context = {}
     form = ClienteForm()

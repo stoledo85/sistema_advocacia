@@ -2,42 +2,43 @@
 {% load crispy_forms_tags %}
 {% block titulo %}<center>Cadastro de Processos</center>{% endblock titulo %}
 {% block conteudo %}
-        {% if erro %}
-			<div class="alert alert-danger">{{ erro }}</div>
-		{% endif %}
-		{% if sucesso %}
-			<div class="alert alert-success">{{ sucesso }}</div>
-        {% endif %}
+<div class="form-group">
+    {% if erro %}
+        <div class="alert alert-danger">{{ erro }}</div>
+    {% endif %}
+    {% if sucesso %}
+    <div class="alert alert-success">{{ sucesso }}</div>
+    {% endif %}
     <form action="{% url 'processos:processo' %}" method="post">
-    {% csrf_token %}
-            <div class="form-group row">
-                <div class="col-sm">{{form.cliente|as_crispy_field}}</div>
-                <div class="col-sm">{{form.area_atuacao|as_crispy_field}}</div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm">{{form.obj_acao|as_crispy_field}}</div>
-                <div class="col-sm">{{form.cnj|as_crispy_field}}</div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm">{{form.local_tramite|as_crispy_field}}</div>
-                <div class="col-sm">{{form.tramite_uf|as_crispy_field}}</div>
-                <div class="col-sm">{{form.advogado|as_crispy_field}}</div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm">{{form.dt_contratacao|as_crispy_field}}</div>
-                <div class="col-sm">{{form.dt_execucao|as_crispy_field}}</div>
-                <div class="col-sm">{{form.dt_sentenca|as_crispy_field}}</div>
-                
-            </div>
-                <div class="form-group row">
-                    <div class="col-sm">{{form.vlr_causa|as_crispy_field}}</div>
-                    <div class="col-sm">{{form.pedido|as_crispy_field}}</div>
-                </div>
-            <div class="form-group">
-                <div class="mb-3">{{form.obs|as_crispy_field}}</div>
-            </div>
-            
+        {% csrf_token %}
+        {{form | crispy}}
+        <!-- <div class="form-group row">
+            <div class="col-sm">{{form.cliente|as_crispy_field}}</div>
+            <div class="col-sm">{{form.area_atuacao|as_crispy_field}}</div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm">{{form.obj_acao|as_crispy_field}}</div>
+            <div class="col-sm">{{form.cnj|as_crispy_field}}</div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm">{{form.local_tramite|as_crispy_field}}</div>
+            <div class="col-sm">{{form.tramite_uf|as_crispy_field}}</div>
+            <div class="col-sm">{{form.advogado|as_crispy_field}}</div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm">{{form.dt_contratacao|as_crispy_field}}</div>
+            <div class="col-sm">{{form.dt_execucao|as_crispy_field}}</div>
+            <div class="col-sm">{{form.dt_sentenca|as_crispy_field}}</div>    
+        </div>
+        <div class="form-group row">
+            <div class="col-sm">{{form.vlr_causa|as_crispy_field}}</div>
+            <div class="col-sm">{{form.pedido|as_crispy_field}}</div>
+        </div>
+        <div class="form-group">
+            <div class="mb-3">{{form.obs|as_crispy_field}}</div>
+        </div>
+</div> -->
         <input type="submit" class="btn btn-primary" value="Salvar"/>
     </form>
+
 {% endblock conteudo %}

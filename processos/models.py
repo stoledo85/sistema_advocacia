@@ -30,7 +30,6 @@ class Processo(models.Model):
     cnj = models.CharField(verbose_name="Nro do Processo(CNJ)", max_length=20)
     local_tramite = models.CharField(verbose_name='Tramite', max_length=15)
     tramite_uf = models.CharField(verbose_name="UF", max_length=2, choices=UF)
-    nro_processo = models.CharField(verbose_name="Processo", max_length=20)
     # Advogado Responsavel a ser vinculado com o user.
     advogado = models.ForeignKey(
         User, verbose_name="Advogado Responsavel", on_delete=models.DO_NOTHING)
@@ -43,7 +42,7 @@ class Processo(models.Model):
     obs = models.TextField(verbose_name="Obs")
 
     def __str__(self):
-        return self.cliente + " - " + self.nro_processo
+        return self.nro_processo
 
 
 class faseProcesso(models.Model):
