@@ -1,34 +1,15 @@
-## Sistema de advocacia em Django
+# Sistema de advocacia em Django
 
-Projeto realizado no Trabalho de Conclusão de Curso de 2020.
+Conforme a proposta do trabalho é um sistema basico para gerenciar um escritorio de advocacia.
 
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | **Sistema de Advocacia**
+| :label: Tecnologias | Python, Django
 
-## Technology
+<!-- Inserir imagem com a #vitrinedev ao final do link -->
+<!-- ![](https://via.placeholder.com/1200x500.png?text=imagem+lindona+do+meu+projeto#vitrinedev) -->
 
-Here are the technologies used in this project.
+## Detalhes do projeto
 
-* Python version  3.7
-* Django version 3.1.1
-* Django Crispy Forms version 1.10.0
-
-
-## Services Used
-
-* Github
-
-## Features
-
-  - Conforme a proposta do trabalho é um sistema basico para gerenciar um escritorio de advocacia.
-
-## Versioning
-
-1.0.0.0
-
-
-## Authors
-
-* Sander Toledo: @stoledo85 (https://github.com/stoledo85)
-
-
-Please follow github and join us!
-Thanks to visiting me and good coding!
+Textos e imagens que descrevam seu projeto, suas conquistas, seus desafios, próximos passos, etc...
