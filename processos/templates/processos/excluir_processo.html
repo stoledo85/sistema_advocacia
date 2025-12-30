@@ -1,0 +1,11 @@
+{% extends "clientes/base.html" %}
+
+{% block content %}
+<h2>Excluir Processo {{ processo.cnj }}</h2>
+<p>Tem certeza que deseja excluir o processo "{{ processo.cnj }}"?</p>
+<form method="post" action="{% url 'processos:excluir_processo' processo.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    <a href="{% url 'processos:listaprocessos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

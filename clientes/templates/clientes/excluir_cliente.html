@@ -1,11 +1,14 @@
-{% extends "base.html" %}
+{% extends "clientes/base.html" %}
 
 {% block content %}
 <h2>Excluir Cliente</h2>
+{% if erro %}
+<div class="alert alert-danger">{{ erro }}</div>
+{% endif %}
 <p>Tem certeza que deseja excluir o cliente "{{ cliente.nome_cliente }}"?</p>
-<form method="post">
+<form method="post" action="{% url 'clientes:excluir_cliente' cliente.id %}">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-    <a href="{% url 'listagem_cliente' %}" class="btn btn-secondary">Cancelar</a>
+    <a href="{% url 'clientes:listacliente' %}" class="btn btn-secondary">Cancelar</a>
 </form>
 {% endblock %}

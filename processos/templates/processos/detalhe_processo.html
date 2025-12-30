@@ -1,0 +1,59 @@
+{% extends 'clientes/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}<center>Detalhes do Processo {{ processo.cnj }}</center>{% endblock titulo %}
+
+{% block conteudo %}
+<div class="card mb-4">
+    <div class="card-header">
+        Informações Gerais
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Cliente: {{ processo.cliente }}</h5>
+        <p class="card-text">
+            <strong>CNJ:</strong> {{ processo.cnj }}<br>
+            <strong>Área de Atuação:</strong> {{ processo.area_atuacao }}<br>
+            <strong>Objetivo:</strong> {{ processo.obj_acao }}<br>
+            <strong>Local Tramite:</strong> {{ processo.local_tramite }} ({{ processo.tramite_uf }})<br>
+            <strong>Advogado:</strong> {{ processo.advogado }}<br>
+            <strong>Data Contratação:</strong> {{ processo.dt_contratacao }}<br>
+            <strong>Valor da Causa:</strong> {{ processo.vlr_causa }}<br>
+            <strong>Processo Finalizado:</strong> {% if processo.finalizado %}Sim{% else %}Não{% endif %}<br>
+        </p>
+        <a href="{% url 'processos:processo' %}" class="btn btn-primary">Novo Processo</a>
+        <a href="{% url 'processos:listaprocessos' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
+
+<h3>Fases do Processo</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fase</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fase in fases %}
+            <tr>
+                <td>{{ fase.tipo_fase_processo }}</td>
+                <td>{{ fase.desc }}</td>
+                <td>
+                    <a href="{% url 'processos:atualizar_fase' fase.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'processos:excluir_fase' fase.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">Nenhuma fase registrada para este processo.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url 'processos:faseprocesso' %}" class="btn btn-info mt-3">Adicionar Fase</a>
+
+{% endblock conteudo %}

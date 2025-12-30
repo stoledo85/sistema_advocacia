@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "clientes/base.html" %}
 
 {% block conteudo %}
 <h2>Lista de Clientes</h2>
@@ -16,12 +16,14 @@
             <td>{{ cliente.nome_cliente }}</td>
             <td>{{ cliente.cpf }}</td>
             <td>
-                <a href="{% url 'atualizar_cliente' cliente.id %}" class="btn btn-sm btn-primary">Atualizar</a>
-                <a href="{% url 'excluir_cliente' cliente.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                <a href="{% url 'clientes:atualizar_cliente' cliente.id %}" class="btn btn-sm btn-primary">Atualizar</a>
+                <form action="{% url 'clientes:excluir_cliente' cliente.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 {% endblock %}
-

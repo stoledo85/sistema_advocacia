@@ -40,9 +40,10 @@ class Processo(models.Model):
         verbose_name="Valor da Causa", max_digits=5, decimal_places=2)
     pedido = models.CharField(verbose_name="Pedido", max_length=50)
     obs = models.TextField(verbose_name="Obs")
+    finalizado = models.BooleanField(default=False, verbose_name="Processo Finalizado")
 
     def __str__(self):
-        return self.nro_processo
+        return self.cnj
 
 
 class faseProcesso(models.Model):
@@ -52,4 +53,4 @@ class faseProcesso(models.Model):
     processo = models.ForeignKey(Processo, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.tipo_fase_processo + " - " + self.processo
+        return f"{self.tipo_fase_processo} - {self.processo}"

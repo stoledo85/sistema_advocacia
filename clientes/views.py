@@ -3,12 +3,24 @@ from django.shortcuts import HttpResponseRedirect, get_object_or_404, redirect, 
 
 from .forms import BuscaClienteForm, ClienteForm
 from .models import Cliente
+from processos.models import Processo
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, "clientes/index.html")
+    processos_total = Processo.objects.count()
+    processos_ativos = Processo.objects.filter(finalizado=False).count()
+    processos_finalizados = Processo.objects.filter(finalizado=True).count()
+    ultimos_processos = Processo.objects.order_by("-id")[:5]
+
+    context = {
+        "processos_total": processos_total,
+        "processos_ativos": processos_ativos,
+        "processos_finalizados": processos_finalizados,
+        "ultimos_processos": ultimos_processos,
+    }
+    return render(request, "clientes/index.html", context)
 
 
 def clienteView(request):
@@ -37,7 +49,7 @@ def atualizarCliente(request, cliente_id):
         form = ClienteForm(request.POST, instance=cliente)
         if form.is_valid():
             form.save()
-            return redirect("listagem_cliente")
+        return redirect("clientes:listacliente")
     else:
         form = ClienteForm(instance=cliente)
     return render(
@@ -45,11 +57,14 @@ def atualizarCliente(request, cliente_id):
     )
 
 
+
 def excluirCliente(request, cliente_id):
     cliente = get_object_or_404(Cliente, id=cliente_id)
     if request.method == "POST":
+        if Processo.objects.filter(cliente=cliente).exists():
+           return render(request, "clientes/excluir_cliente.html", {"cliente": cliente, "erro": "Este cliente nao pode ser excluido pois existe um processo vinculado a ele"})
         cliente.delete()
-        return redirect("listagem_cliente")
+        return redirect("clientes:listacliente")
     return render(request, "clientes/excluir_cliente.html", {"cliente": cliente})
 
 

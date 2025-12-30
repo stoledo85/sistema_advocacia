@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="pt_br">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="utf-8" />
-        <meta name="author" content="Sander Toledo" />
 
-        <!-- SCRIPTS -->
-        <!-- JQuery -->
-        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
-        <!-- Popper Minimal JavaScript-->
-        <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Sander Toledo" />
 
-        {# CSS do HTML #}
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
-        <!-- Bootstrap core CSS -->
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
-        <!-- Bootstrap Extras-->
-        <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" />
-        <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" />
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Popper Minimal JavaScript-->
+    <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
 
-        {% block css %} {% endblock css %}
-        <title>Sistema de Advocacia</title>
-    </head>
+    {# CSS do HTML #}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- Bootstrap Extras-->
+    <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" />
+
+    {% block css %} {% endblock css %}
+    <title>Sistema de Advocacia</title>
+</head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="{% url 'clientes:index'%}">
-            <img src="{% static "img/PinClipart.com_sky-background-clipart_1315100.png" %}" alt="logo" width="40" height="40">
+            <img src="{% static 'img/PinClipart.com_sky-background-clipart_1315100.png' %}" alt="logo" width="40"
+                height="40">
         </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"      >
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link text-white" href="{% url 'clientes:index' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Clientes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'clientes:cliente' %}">Cadastrar</a>
-                    <a class="dropdown-item" href="{% url 'clientes:listacliente' %}">Listar Clientes</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"            >
-                Processos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'processos:processo' %}">Processo Novo</a>
-                <a class="dropdown-item" href="{% url 'processos:faseprocesso' %}">Fase do Processo</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="{% url 'clientes:index' %}">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'clientes:cliente' %}">Cadastrar</a>
+                        <a class="dropdown-item" href="{% url 'clientes:listacliente' %}">Listar Clientes</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Processos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'processos:processo' %}">Processo Novo</a>
+                        <a class="dropdown-item" href="{% url 'processos:listaprocessos' %}">Listar Processos</a>
+                        <a class="dropdown-item" href="{% url 'processos:faseprocesso' %}">Fase do Processo</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="container">
         <div class="col-md-10 offset-md-1 mt-5">
@@ -69,5 +77,6 @@
             </div>
         </div>
     </div>
-  </body>
+</body>
+
 </html>

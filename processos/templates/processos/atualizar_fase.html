@@ -1,0 +1,15 @@
+{% extends 'clientes/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}<center>Atualizar Fase do Processo</center>{% endblock titulo %}
+
+{% block conteudo %}
+<div class="form-group">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form | crispy}}
+        <input type="submit" class="btn btn-primary" value="Salvar" />
+        <a href="{% url 'processos:detalhe_processo' fase.processo.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock conteudo %}
