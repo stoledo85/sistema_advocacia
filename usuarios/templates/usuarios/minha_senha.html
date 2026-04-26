@@ -1,0 +1,81 @@
+{% extends 'clientes/base.html' %}
+
+{% block titulo %}Alterar Minha Senha{% endblock %}
+
+{% block conteudo %}
+<div class="adv-card" style="max-width: 500px; margin: 0 auto;">
+    <div class="card-header">
+        <h5>Segurança</h5>
+    </div>
+    <div class="card-body">
+        
+        {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+            <div style="background: {% if message.tags == 'success' %}rgba(16, 185, 129, 0.1){% else %}rgba(239, 68, 68, 0.1){% endif %}; 
+                        color: {% if message.tags == 'success' %}var(--success){% else %}var(--danger){% endif %}; 
+                        padding: 1rem; border-radius: var(--radius-sm); font-size: 0.85rem;">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.85rem;">
+                <strong>Erro na validação:</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.25rem;">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="adv-form-group">
+                {% for field in form %}
+                    <div class="mb-4">
+                        <label class="adv-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">{{ field.help_text|safe }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="adv-btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-key mr-2"></i> Alterar Senha
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    input[type="password"] {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: var(--bg-app);
+        border: 1.5px solid var(--border-color);
+        border-radius: var(--radius-md);
+        color: var(--text-main);
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    input:focus {
+        border-color: var(--gold);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+</style>
+{% endblock %}

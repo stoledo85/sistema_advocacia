@@ -1,0 +1,66 @@
+{% extends 'clientes/base.html' %}
+
+{% block titulo %}Gerenciamento de Usuários{% endblock %}
+
+{% block conteudo %}
+<div class="adv-card">
+    <div class="card-header">
+        <div>
+            <h5>Usuários do Sistema</h5>
+            <p class="text-muted" style="font-size: 0.85rem;">Gerencie os cargos e permissões da sua equipe e clientes.</p>
+        </div>
+        <a href="{% url 'usuarios:criar_usuario' %}" class="adv-btn btn-primary btn-sm">
+            <i class="fas fa-user-plus mr-1"></i> Novo Usuário
+        </a>
+    </div>
+
+    {% if messages %}
+    <div style="padding: 1rem 1.5rem;">
+        {% for message in messages %}
+        <div style="background: var(--success-light); color: var(--success); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.85rem; margin-bottom: 0.5rem;">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="adv-table-wrapper">
+        <table class="adv-table">
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>E-mail</th>
+                    <th>Cargo Atual</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div class="user-avatar" style="width: 32px; height: 32px; font-size: 0.7rem;">{{ u.username|slice:":2"|upper }}</div>
+                            <span style="font-weight: 600;">{{ u.username }}</span>
+                        </div>
+                    </td>
+                    <td style="color: var(--text-muted);">{{ u.email }}</td>
+                    <td>
+                        <span class="adv-badge {% if u.perfil.role == 'ADMIN' %}badge-success{% else %}badge-warning{% endif %}">
+                            {{ u.perfil.get_role_display }}
+                        </span>
+                    </td>
+                    <td class="text-center" style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <a href="{% url 'usuarios:editar_usuario' u.id %}" class="adv-btn btn-outline btn-sm" title="Editar Informações">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'usuarios:trocar_senha' u.id %}" class="adv-btn btn-outline btn-sm" title="Alterar Senha" style="color: var(--gold);">
+                            <i class="fas fa-key"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,8 +1,6 @@
 asgiref>=3.8.1
-Django==5.1.4
-django-crispy-forms>=2.3
-crispy-bootstrap4>=2024.1
-Pillow==11.0.0
+Django==6.0.4
+Pillow==12.2.0
 pytz>=2024.2
 reportlab>=4.2.5
 sqlparse>=0.5.3

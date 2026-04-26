@@ -25,19 +25,31 @@ class ClienteForm(ModelForm):
             "email": "E-mail",
             "telefone": "Telefone",
         }
+        widgets = {
+            "nome_cliente": forms.TextInput(attrs={"placeholder": "Ex: João da Silva"}),
+            "cpf": forms.TextInput(attrs={"placeholder": "000.000.000-00"}),
+            "rg": forms.TextInput(attrs={"placeholder": "00.000.000-0"}),
+            "data_nascimento": forms.DateInput(attrs={"type": "date"}),
+            "endereco": forms.TextInput(attrs={"placeholder": "Rua, Avenida, etc."}),
+            "nro_endereco": forms.TextInput(attrs={"placeholder": "123"}),
+            "cep": forms.TextInput(attrs={"placeholder": "00000-000"}),
+            "email": forms.EmailInput(attrs={"placeholder": "email@exemplo.com"}),
+            "telefone": forms.TextInput(attrs={"placeholder": "(00) 00000-0000"}),
+            "bairro": forms.TextInput(attrs={"placeholder": "Bairro"}),
+            "cidade": forms.TextInput(attrs={"placeholder": "Cidade"}),
+        }
 
 
 class BuscaClienteForm(forms.Form):
-    """
-    Pesquisa o nome ou cpf do Cliente dentro de uma lista.
-    Args:
-        nome_cliente -- recebe uma string de tamanho 15 do nome.
-        cpf -- recebe o nome do cpf sem pontos ou marcações.
-    """
-
-    nome_cliente = forms.CharField(max_length=45)
-    cpf = forms.CharField(max_length=11)
-    labels = {
-        "nome_cliente": "Nome",
-        "cpf": "CPF",
-    }
+    nome_cliente = forms.CharField(
+        max_length=45, 
+        label="Nome do Cliente", 
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Pesquisar por nome..."})
+    )
+    cpf = forms.CharField(
+        max_length=11, 
+        label="CPF", 
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "000.000.000-00"})
+    )

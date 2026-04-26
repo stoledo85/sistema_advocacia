@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Advocacia Digital</title>
+    <link rel="stylesheet" href="{% static 'css/advocacia.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 80px;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .login-title {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-form .adv-form-group {
+            text-align: left;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .login-footer {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body data-theme="dark"> <!-- Defaulting login to a dark, elegant feel -->
+    <div class="login-container">
+        <div class="login-card">
+            <img src="{% static 'img/logo_premium.png' %}" alt="logo" class="login-logo">
+            <h1 class="login-title">Bem-vindo</h1>
+            <p class="login-subtitle">Acesse sua conta para gerenciar seus processos</p>
+
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                <div style="background: var(--danger-light); color: var(--danger); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    Usuário ou senha incorretos.
+                </div>
+                {% endif %}
+
+                <div class="adv-form-group">
+                    <label class="adv-label">Usuário</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="adv-form-group">
+                    <label class="adv-label">Senha</label>
+                    {{ form.password }}
+                </div>
+
+                <button type="submit" class="adv-btn btn-primary login-btn">
+                    Entrar no Sistema
+                </button>
+            </form>
+        </div>
+        <div class="login-footer text-center">
+            &copy; 2026 Advocacia Digital. Todos os direitos reservados.
+        </div>
+    </div>
+
+    <script>
+        // Ensure inputs look premium
+        document.querySelectorAll('input').forEach(input => {
+            input.classList.add('adv-input');
+        });
+    </script>
+</body>
+</html>

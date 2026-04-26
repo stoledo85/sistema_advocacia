@@ -7,76 +7,137 @@
     <meta charset="utf-8" />
     <meta name="author" content="Sander Toledo" />
 
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Popper Minimal JavaScript-->
-    <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
-
-    {# CSS do HTML #}
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
-    <!-- Bootstrap Extras-->
-    <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet" />
+    <!-- Custom Design System -->
+    <link href="{% static 'css/advocacia.css' %}" rel="stylesheet" />
 
     {% block css %} {% endblock css %}
     <title>Sistema de Advocacia</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="{% url 'clientes:index'%}">
-            <img src="{% static 'img/PinClipart.com_sky-background-clipart_1315100.png' %}" alt="logo" width="40"
-                height="40">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link text-white" href="{% url 'clientes:index' %}">Home <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clientes
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'clientes:cliente' %}">Cadastrar</a>
-                        <a class="dropdown-item" href="{% url 'clientes:listacliente' %}">Listar Clientes</a>
+    <header class="adv-navbar">
+        <div class="adv-container nav-content">
+            <a class="nav-brand" href="{% url 'clientes:index'%}">
+                <img src="{% static 'img/logo_light.png' %}" alt="logo" class="nav-logo logo-light">
+                <img src="{% static 'img/logo_dark.png' %}" alt="logo" class="nav-logo logo-dark">
+                Advocacia Digital
+            </a>
+            <nav class="nav-links">
+                {% if user.perfil.role != 'CLIENTE' %}
+                <a class="nav-link" href="{% url 'clientes:index' %}">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <div class="nav-dropdown">
+                    <span class="nav-link">
+                        <i class="fas fa-users"></i> Clientes <i class="fas fa-chevron-down ml-1" style="font-size: 0.7rem"></i>
+                    </span>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'clientes:cliente' %}">
+                            <i class="fas fa-user-plus"></i> Novo Cadastro
+                        </a>
+                        <a class="dropdown-item" href="{% url 'clientes:listacliente' %}">
+                            <i class="fas fa-list"></i> Listar Clientes
+                        </a>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdownMenuLink" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Processos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'processos:processo' %}">Processo Novo</a>
-                        <a class="dropdown-item" href="{% url 'processos:listaprocessos' %}">Listar Processos</a>
-                        <a class="dropdown-item" href="{% url 'processos:faseprocesso' %}">Fase do Processo</a>
+                </div>
+                <div class="nav-dropdown">
+                    <span class="nav-link">
+                        <i class="fas fa-file-invoice"></i> Processos <i class="fas fa-chevron-down ml-1" style="font-size: 0.7rem"></i>
+                    </span>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'processos:processo' %}">
+                            <i class="fas fa-folder-plus"></i> Abrir Processo
+                        </a>
+                        <a class="dropdown-item" href="{% url 'processos:listaprocessos' %}">
+                            <i class="fas fa-search"></i> Ver Processos
+                        </a>
+                        <a class="dropdown-item" href="{% url 'processos:faseprocesso' %}">
+                            <i class="fas fa-history"></i> Gerenciar Fases
+                        </a>
                     </div>
-                </li>
-            </ul>
+                </div>
+                {% else %}
+                <a class="nav-link" href="{% url 'processos:listaprocessos' %}">
+                    <i class="fas fa-folder-open"></i> Meus Processos
+                </a>
+                {% endif %}
+
+                {% if user.perfil.role == 'ADMIN' %}
+                <a class="nav-link" href="{% url 'usuarios:listagem_usuarios' %}">
+                    <i class="fas fa-users-cog"></i> Gestão
+                </a>
+                {% endif %}
+                
+                <div class="nav-user nav-dropdown">
+                    <button id="theme-toggle" class="adv-btn btn-outline btn-sm" style="margin-right: 1rem; border: none; color: var(--accent);">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-avatar">{{ user.username|slice:":2"|upper }}</div>
+                    <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-navbar);">{{ user.username }} <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 0.25rem;"></i></span>
+                    
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'usuarios:meu_perfil' %}">
+                            <i class="fas fa-user-edit"></i> Meu Perfil
+                        </a>
+                        <a class="dropdown-item" href="{% url 'usuarios:minha_senha' %}">
+                            <i class="fas fa-key"></i> Alterar Senha
+                        </a>
+                        <div style="height: 1px; background: var(--border-color); margin: 0.5rem 0;"></div>
+                        <form action="{% url 'usuarios:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Sair do Sistema
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div class="container">
-        <div class="col-md-10 offset-md-1 mt-5">
-            <div class="jumbotron">
-                <h1 class="display-4">{% block titulo %}Sistema de Advocacia{% endblock titulo %}</h1>
-                <hr class="my-4" />
-                {% block conteudo %} {% endblock conteudo %}
-            </div>
-        </div>
-    </div>
+    </header>
+
+    <main class="adv-container">
+        <header class="page-header">
+            <h1 class="page-title">{% block titulo %}Dashboard{% endblock titulo %}</h1>
+        </header>
+        
+        <section class="main-content">
+            {% block conteudo %} {% endblock conteudo %}
+        </section>
+    </main>
+
+    <script>
+        // Dark Mode Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.documentElement;
+        
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+    </script>
+    {% block scripts %} {% endblock scripts %}
 </body>
 
 </html>

@@ -1,29 +1,48 @@
 {% extends "clientes/base.html" %}
 
+{% block titulo %}Lista de Clientes{% endblock %}
+
 {% block conteudo %}
-<h2>Lista de Clientes</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.nome_cliente }}</td>
-            <td>{{ cliente.cpf }}</td>
-            <td>
-                <a href="{% url 'clientes:atualizar_cliente' cliente.id %}" class="btn btn-sm btn-primary">Atualizar</a>
-                <form action="{% url 'clientes:excluir_cliente' cliente.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="adv-card">
+    <div class="card-header">
+        <h5>Clientes Cadastrados</h5>
+        <a href="{% url 'clientes:cliente' %}" class="adv-btn btn-primary btn-sm">
+            <i class="fas fa-plus mr-1"></i> Novo Cliente
+        </a>
+    </div>
+    <div class="adv-table-wrapper">
+        <table class="adv-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td style="font-weight: 600;">{{ cliente.nome_cliente }}</td>
+                    <td style="color: var(--text-muted);">{{ cliente.cpf }}</td>
+                    <td class="text-center" style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <a href="{% url 'clientes:atualizar_cliente' cliente.id %}" class="adv-btn btn-outline btn-sm" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form action="{% url 'clientes:excluir_cliente' cliente.id %}" method="post" onsubmit="return confirm('Tem certeza?');">
+                            {% csrf_token %}
+                            <button type="submit" class="adv-btn btn-danger btn-sm" title="Excluir">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center py-5 text-muted">Nenhum cliente cadastrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

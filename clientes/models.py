@@ -41,6 +41,8 @@ class Cliente(models.Model):
         ("RR", "Roraima"), ("SC", "Santa Catarina"),
         ("SP", "São Paulo"), ("SE", "Sergipe"), ("TO", "Tocantins"),
     )
+    
+    usuario = models.OneToOneField("auth.User", on_delete=models.SET_NULL, null=True, blank=True, related_name='cliente_perfil')
     nome_cliente = models.CharField(max_length=100)
     cpf = models.CharField(max_length=14)
     rg = models.CharField(max_length=8)

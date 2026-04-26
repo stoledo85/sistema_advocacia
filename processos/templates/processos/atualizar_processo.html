@@ -1,15 +1,25 @@
 {% extends 'clientes/base.html' %}
-{% load crispy_forms_tags %}
 
-{% block titulo %}<center>Atualizar Processo</center>{% endblock titulo %}
+{% block titulo %}Atualizar Processo{% endblock titulo %}
 
 {% block conteudo %}
-<div class="form-group">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form | crispy}}
-        <input type="submit" class="btn btn-primary" value="Salvar" />
-        <a href="{% url 'processos:detalhe_processo' processo.id %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+<div class="adv-card">
+    <div class="card-header">
+        <h5>Editar Dados do Processo</h5>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="adv-form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="mt-4" style="display: flex; gap: 1rem; align-items: center;">
+                <button type="submit" class="adv-btn btn-primary">
+                    <i class="fas fa-save mr-2"></i> Salvar Alterações
+                </button>
+                <a href="{% url 'processos:detalhe_processo' processo.id %}" class="adv-btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock conteudo %}

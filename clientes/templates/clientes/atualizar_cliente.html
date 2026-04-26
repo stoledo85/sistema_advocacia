@@ -1,11 +1,25 @@
 {% extends "clientes/base.html" %}
-{% load crispy_forms_tags %}
+
+{% block titulo %}Atualizar Cliente{% endblock %}
 
 {% block conteudo %}
-<h2>Atualizar Cliente</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Atualizar</button>
-</form>
+<div class="adv-card">
+    <div class="card-header">
+        <h5>Editar Informações do Cliente</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="adv-form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="mt-4" style="display: flex; gap: 1rem; align-items: center;">
+                <button type="submit" class="adv-btn btn-primary">
+                    <i class="fas fa-save mr-2"></i> Salvar Alterações
+                </button>
+                <a href="{% url 'clientes:listacliente' %}" class="adv-btn btn-outline">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

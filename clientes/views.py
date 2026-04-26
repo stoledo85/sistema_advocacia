@@ -5,9 +5,12 @@ from .forms import BuscaClienteForm, ClienteForm
 from .models import Cliente
 from processos.models import Processo
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
+@login_required
 def index(request):
     processos_total = Processo.objects.count()
     processos_ativos = Processo.objects.filter(finalizado=False).count()
@@ -23,6 +26,7 @@ def index(request):
     return render(request, "clientes/index.html", context)
 
 
+@login_required
 def clienteView(request):
     """Cadastro de Cliente.
     Recebe um objeto cliente no formulario se o resultado for valido,
@@ -43,6 +47,7 @@ def clienteView(request):
     return render(request, "clientes/cliente.html", context)
 
 
+@login_required
 def atualizarCliente(request, cliente_id):
     cliente = get_object_or_404(Cliente, id=cliente_id)
     if request.method == "POST":
@@ -58,6 +63,7 @@ def atualizarCliente(request, cliente_id):
 
 
 
+@login_required
 def excluirCliente(request, cliente_id):
     cliente = get_object_or_404(Cliente, id=cliente_id)
     if request.method == "POST":
@@ -68,6 +74,7 @@ def excluirCliente(request, cliente_id):
     return render(request, "clientes/excluir_cliente.html", {"cliente": cliente})
 
 
+@login_required
 def listagemCliente(request):
     clientes = []
     form = BuscaClienteForm()

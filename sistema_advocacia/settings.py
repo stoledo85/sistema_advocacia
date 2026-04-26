@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'clientes',
     'processos',
-    'crispy_forms',
-    'crispy_bootstrap4',
+    'usuarios',
 ]
 
 
@@ -74,6 +73,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sistema_advocacia.wsgi.application'
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.1/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Auth Settings
+LOGIN_REDIRECT_URL = 'clientes:index'
+LOGOUT_REDIRECT_URL = 'usuarios:login'
+LOGIN_URL = 'usuarios:login'
 
 
 # Database
@@ -124,8 +134,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "sistema_advocacia/static"),)

@@ -1,0 +1,53 @@
+{% extends 'clientes/base.html' %}
+
+{% block titulo %}Alterar Cargo de {{ usuario_edit.username }}{% endblock %}
+
+{% block conteudo %}
+<div class="adv-card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-header">
+        <h5>Configurações de Perfil</h5>
+        <a href="{% url 'usuarios:listagem_usuarios' %}" class="adv-btn btn-outline btn-sm">Voltar</a>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                <div class="adv-form-group" style="margin-bottom: 0;">
+                    <label class="adv-label">Primeiro Nome</label>
+                    <input type="text" name="first_name" class="adv-input" value="{{ usuario_edit.first_name }}">
+                </div>
+                <div class="adv-form-group" style="margin-bottom: 0;">
+                    <label class="adv-label">Sobrenome</label>
+                    <input type="text" name="last_name" class="adv-input" value="{{ usuario_edit.last_name }}">
+                </div>
+            </div>
+
+            <div class="adv-form-group">
+                <label class="adv-label">E-mail</label>
+                <input type="email" name="email" class="adv-input" value="{{ usuario_edit.email }}">
+            </div>
+
+            <div class="adv-form-group">
+                <label class="adv-label" for="role">Atribuir Novo Cargo</label>
+                <select name="role" id="role" class="adv-input">
+                    {% for key, value in roles %}
+                        <option value="{{ key }}" {% if usuario_edit.perfil.role == key %}selected{% endif %}>
+                            {{ value }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <p class="text-muted mt-2" style="font-size: 0.8rem;">
+                    <strong>Nota:</strong> Alterar o cargo mudará as permissões de acesso deste usuário imediatamente.
+                </p>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <button type="submit" class="adv-btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-save mr-2"></i> Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

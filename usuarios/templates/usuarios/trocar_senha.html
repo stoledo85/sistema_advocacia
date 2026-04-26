@@ -1,0 +1,71 @@
+{% extends 'clientes/base.html' %}
+
+{% block titulo %}Alterar Senha de {{ usuario_edit.username }}{% endblock %}
+
+{% block conteudo %}
+<div class="adv-card" style="max-width: 500px; margin: 0 auto;">
+    <div class="card-header">
+        <h5>Segurança de Acesso</h5>
+        <a href="{% url 'usuarios:listagem_usuarios' %}" class="adv-btn btn-outline btn-sm">Voltar</a>
+    </div>
+    <div class="card-body">
+        <div style="background: rgba(212, 175, 55, 0.1); color: var(--gold); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem; font-size: 0.85rem; display: flex; gap: 0.75rem; align-items: center;">
+            <i class="fas fa-excluir-triangle" style="font-size: 1.2rem;"></i>
+            <span>Como administrador, você está definindo uma nova senha para este usuário. Ele deverá ser informado da nova credencial.</span>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div style="background: rgba(239, 68, 68, 0.1); color: var(--danger); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 0.85rem;">
+                <strong>Erro na validação:</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.25rem;">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="adv-form-group">
+                {% for field in form %}
+                    <div class="mb-4">
+                        <label class="adv-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="adv-btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-key mr-2"></i> Definir Nova Senha
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    input[type="text"], input[type="password"], input[type="email"] {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: var(--bg-app);
+        border: 1.5px solid var(--border-color);
+        border-radius: var(--radius-md);
+        color: var(--text-main);
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    input:focus {
+        border-color: var(--gold);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+</style>
+{% endblock %}

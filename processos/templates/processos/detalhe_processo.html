@@ -1,59 +1,96 @@
 {% extends 'clientes/base.html' %}
-{% load crispy_forms_tags %}
 
-{% block titulo %}<center>Detalhes do Processo {{ processo.cnj }}</center>{% endblock titulo %}
+{% block titulo %}Processo {{ processo.cnj }}{% endblock titulo %}
 
 {% block conteudo %}
-<div class="card mb-4">
+<div class="adv-card mb-4">
     <div class="card-header">
-        Informações Gerais
+        <h5>Informações Gerais</h5>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{% url 'processos:processo' %}" class="adv-btn btn-primary btn-sm">Novo Processo</a>
+            <a href="{% url 'processos:listaprocessos' %}" class="adv-btn btn-outline btn-sm">Voltar</a>
+        </div>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Cliente: {{ processo.cliente }}</h5>
-        <p class="card-text">
-            <strong>CNJ:</strong> {{ processo.cnj }}<br>
-            <strong>Área de Atuação:</strong> {{ processo.area_atuacao }}<br>
-            <strong>Objetivo:</strong> {{ processo.obj_acao }}<br>
-            <strong>Local Tramite:</strong> {{ processo.local_tramite }} ({{ processo.tramite_uf }})<br>
-            <strong>Advogado:</strong> {{ processo.advogado }}<br>
-            <strong>Data Contratação:</strong> {{ processo.dt_contratacao }}<br>
-            <strong>Valor da Causa:</strong> {{ processo.vlr_causa }}<br>
-            <strong>Processo Finalizado:</strong> {% if processo.finalizado %}Sim{% else %}Não{% endif %}<br>
-        </p>
-        <a href="{% url 'processos:processo' %}" class="btn btn-primary">Novo Processo</a>
-        <a href="{% url 'processos:listaprocessos' %}" class="btn btn-secondary">Voltar</a>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div>
+                <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; margin-bottom: 0.25rem;">Cliente</p>
+                <h4 style="color: var(--text-main); font-weight: 700;">{{ processo.cliente }}</h4>
+            </div>
+            <div>
+                <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; margin-bottom: 0.25rem;">Área de Atuação</p>
+                <p style="font-weight: 500;">{{ processo.area_atuacao }}</p>
+            </div>
+            <div>
+                <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; font-weight: 600; margin-bottom: 0.25rem;">Status</p>
+                {% if processo.finalizado %}
+                    <span class="adv-badge badge-success">Finalizado</span>
+                {% else %}
+                    <span class="adv-badge badge-warning">Em Andamento</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted);">CNJ</strong>
+                <span>{{ processo.cnj }}</span>
+            </div>
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted);">Local Trâmite</strong>
+                <span>{{ processo.local_tramite }} ({{ processo.tramite_uf }})</span>
+            </div>
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted);">Advogado Responsável</strong>
+                <span>{{ processo.advogado }}</span>
+            </div>
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted);">Valor da Causa</strong>
+                <span style="font-weight: 600; color: var(--success);">{{ processo.vlr_causa }}</span>
+            </div>
+        </div>
     </div>
 </div>
 
-<h3>Fases do Processo</h3>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Fase</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for fase in fases %}
-            <tr>
-                <td>{{ fase.tipo_fase_processo }}</td>
-                <td>{{ fase.desc }}</td>
-                <td>
-                    <a href="{% url 'processos:atualizar_fase' fase.id %}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="{% url 'processos:excluir_fase' fase.id %}" class="btn btn-danger btn-sm">Excluir</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2">Nenhuma fase registrada para este processo.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="adv-card">
+    <div class="card-header">
+        <h5>Fases do Processo</h5>
+        <a href="{% url 'processos:faseprocesso' %}" class="adv-btn btn-outline btn-sm">
+            <i class="fas fa-plus mr-1"></i> Adicionar Fase
+        </a>
+    </div>
+    <div class="adv-table-wrapper">
+        <table class="adv-table">
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Descrição</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fase in fases %}
+                <tr>
+                    <td style="font-weight: 600;">{{ fase.tipo_fase_processo }}</td>
+                    <td style="max-width: 400px; color: var(--text-muted);">{{ fase.desc }}</td>
+                    <td class="text-center" style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <a href="{% url 'processos:atualizar_fase' fase.id %}" class="adv-btn btn-outline btn-sm" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'processos:excluir_fase' fase.id %}" class="adv-btn btn-danger btn-sm" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center py-5 text-muted">Nenhuma fase registrada para este processo.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<a href="{% url 'processos:faseprocesso' %}" class="btn btn-info mt-3">Adicionar Fase</a>
-
 {% endblock conteudo %}

@@ -1,41 +1,95 @@
 {% extends 'clientes/base.html' %}
-{% load crispy_forms_tags %}
-{% block titulo %}<center>Cadastro de Clientes</center>{% endblock titulo %}
-{% block conteudo %}
-<div class="form-group">
-        {% if erro %}
-			<div class="alert alert-danger">{{ erro }}</div>
-		{% endif %}
-		{% if sucesso %}
-			<div class="alert alert-success">{{ sucesso }}</div>
-		{% endif %}
 
-    <form action="{% url 'clientes:cliente' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group row">
-            <div class="col-sm-12">{{form.nome_cliente|as_crispy_field}}</div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-3">{{form.cpf|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.rg|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.telefone|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.data_nascimento|as_crispy_field}}</div>                
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-3">{{form.estado_civil|as_crispy_field}}</div>
-            <div class="col-sm-6">{{form.email|as_crispy_field}}</div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-10">{{form.endereco|as_crispy_field}}</div>
-            <div class="col-sm-2">{{form.nro_endereco|as_crispy_field}}</div>
-        </div>
-        <div class='form-group row'>
-            <div class="col-sm-3">{{form.bairro|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.cidade|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.estado|as_crispy_field}}</div>
-            <div class="col-sm-3">{{form.cep|as_crispy_field}}</div>
-        </div>
-            <input type="submit" class="btn btn-primary mb-2" value="Salvar"/>
+{% block titulo %}Cadastro de Clientes{% endblock titulo %}
+
+{% block conteudo %}
+<div class="adv-card">
+    <div class="card-header">
+        <h5><i class="fas fa-user-plus mr-2"></i>Informações do Cliente</h5>
+    </div>
+    <div class="card-body">
+        {% if erro %}
+            <div style="background: var(--danger-light); color: var(--danger); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">{{ erro }}</div>
+        {% endif %}
+        {% if sucesso %}
+            <div style="background: var(--success-light); color: var(--success); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1.5rem;">{{ sucesso }}</div>
+        {% endif %}
+
+        <form action="{% url 'clientes:cliente' %}" method="post">
+            {% csrf_token %}
+            
+            <div class="adv-form-group">
+                <label class="adv-label">Nome Completo</label>
+                {{ form.nome_cliente }}
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="adv-form-group">
+                    <label class="adv-label">CPF</label>
+                    {{ form.cpf }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">RG</label>
+                    {{ form.rg }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">Telefone</label>
+                    {{ form.telefone }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">Data de Nascimento</label>
+                    {{ form.data_nascimento }}
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
+                <div class="adv-form-group">
+                    <label class="adv-label">Estado Civil</label>
+                    {{ form.estado_civil }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">E-mail</label>
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 4fr 1fr; gap: 1rem;">
+                <div class="adv-form-group">
+                    <label class="adv-label">Endereço</label>
+                    {{ form.endereco }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">Nº</label>
+                    {{ form.nro_endereco }}
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                <div class="adv-form-group">
+                    <label class="adv-label">Bairro</label>
+                    {{ form.bairro }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">Cidade</label>
+                    {{ form.cidade }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">Estado</label>
+                    {{ form.estado }}
+                </div>
+                <div class="adv-form-group">
+                    <label class="adv-label">CEP</label>
+                    {{ form.cep }}
+                </div>
+            </div>
+
+            <div class="mt-4" style="display: flex; gap: 1rem; align-items: center;">
+                <button type="submit" class="adv-btn btn-primary">
+                    <i class="fas fa-save mr-2"></i> Salvar Cliente
+                </button>
+                <a href="{% url 'clientes:listacliente' %}" class="adv-btn btn-outline">Cancelar</a>
+            </div>
         </form>
+    </div>
 </div>
 {% endblock conteudo %}
